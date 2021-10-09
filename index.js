@@ -1,16 +1,17 @@
 const express = require('express');
-const { dbConnection } = require('./db/config');
-require('dotenv').config();
-
 const app = express()
 
+var cors = require('cors')
+
+const { dbConnection } = require('./db/config');
+require('dotenv').config();
 
 dbConnection();
 
 
+app.use(cors())
 app.use(express.static('public'));
 app.use(express.json());
-
 
 
 app.use('/api/auth', require('./routes/auth'));
